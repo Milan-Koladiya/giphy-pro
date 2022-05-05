@@ -1,0 +1,1 @@
+export { default as tableTypes } from "./tablesTypes";

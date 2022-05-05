@@ -3,21 +3,21 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Grid, FormControl, TextField } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { Grid, TextField } from '@mui/material';
 
 
-export default function ResponsiveDialog({ open, handleClose, selectedData }: any) {
+export default function ResponsiveDialog({ open, handleClose, selectedData, handleEditRecord, handleDeleteRecord, handleAddData }: any) {
     const [data, setData] = useState<any>({});
-    const theme = useTheme();
+    const [isEdit, setIsEdit] = useState<boolean>(false);
 
     useEffect(() => {
-        setData(selectedData);
-    }, [selectedData])
-
-    console.log("data => ", data);
+        if (selectedData) {
+            const edit = Object.keys(selectedData).length ? true : false;
+            setData(edit ? selectedData : { title: "", description: "", display_name: "" });
+            setIsEdit(edit);
+        }
+    }, [selectedData]);
 
     const handleChange = (e: any) => {
         const name = e.target.name;
@@ -25,30 +25,14 @@ export default function ResponsiveDialog({ open, handleClose, selectedData }: an
         setData({ ...data, [name]: value });
     };
 
-
     return (
         <div>
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="responsive-dialog-title"
-            >
+            <Dialog open={open} onClose={handleClose} aria-labelledby="responsive-dialog-title">
                 <DialogTitle id="responsive-dialog-title">
-                    Edit the info
+                    {isEdit ? "Edit" : "Add"} the info
                 </DialogTitle>
                 <DialogContent>
                     <Grid container sx={{ alignItems: 'center' }} spacing={2}>
-                        <Grid item md={12} sm={12} xs={12}>
-                            <TextField
-                                required
-                                name="display_name"
-                                sx={{ marginTop: '2%', width: "100%" }}
-                                label="Display name"
-                                value={data.display_name}
-                                onChange={handleChange}
-                            >
-                            </TextField>
-                        </Grid>
                         <Grid item md={12} sm={12} xs={12}>
                             <TextField
                                 required
@@ -65,8 +49,19 @@ export default function ResponsiveDialog({ open, handleClose, selectedData }: an
                                 required
                                 name="description"
                                 sx={{ margin: '2% 0%', width: "100%" }}
-                                label="Discription"
+                                label="Description"
                                 value={data.description}
+                                onChange={handleChange}
+                            >
+                            </TextField>
+                        </Grid>
+                        <Grid item md={12} sm={12} xs={12}>
+                            <TextField
+                                required
+                                name="display_name"
+                                sx={{ margin: '2% 0%', width: "100%" }}
+                                label="Body"
+                                value={data.display_name}
                                 onChange={handleChange}
                             >
                             </TextField>
@@ -74,12 +69,15 @@ export default function ResponsiveDialog({ open, handleClose, selectedData }: an
                     </Grid>
                 </DialogContent>
                 <DialogActions >
-                    <Button autoFocus onClick={handleClose}>
+                    <Button color="primary" autoFocus onClick={handleClose}>
                         Cancle
                     </Button>
-                    <Button onClick={handleClose} autoFocus>
+                    <Button color="success" onClick={() => { isEdit ? handleEditRecord(data) : handleAddData(data) }} autoFocus>
                         Save
                     </Button>
+                    {isEdit ? <Button color="error" onClick={() => handleDeleteRecord(data)} autoFocus>
+                        Delete
+                    </Button> : ""}
                 </DialogActions>
             </Dialog>
         </div >
