@@ -14,14 +14,14 @@ type tableFilter = {
 }
 
 const tableColumn: GridColumns = [
-    { headerName: "ID", field: "id" },
-    { headerName: "User name", field: "username" },
-    { headerName: "Title", field: "title", },
-    { headerName: "Description", field: "description", },
-    { headerName: "Display name", field: "display_name", },
-    { headerName: "Avatar", field: "avatar_url", },
-    { headerName: "Creatd time", field: "import_datetime", },
-    { headerName: "Is verified", field: "is_verified", },
+    { headerName: "ID", field: "id", width: 220, maxWidth: 250 },
+    { headerName: "User name", field: "username", width: 220, maxWidth: 250 },
+    { headerName: "Title", field: "title", width: 220, maxWidth: 250 },
+    { headerName: "Description", field: "description", width: 220, maxWidth: 250 },
+    { headerName: "Display name", field: "display_name", width: 220, maxWidth: 250 },
+    { headerName: "Avatar", field: "avatar_url", width: 220, maxWidth: 250 },
+    { headerName: "Creatd time", field: "import_datetime", width: 220, maxWidth: 250 },
+    { headerName: "Is verified", field: "is_verified", width: 220, maxWidth: 250 },
 ];
 
 export type tableRow = {
