@@ -53,7 +53,7 @@ function Tables() {
                 <Button onClick={handleAddRecord}>Add Record</Button>
                 <Button onClick={onGraphsClick}>Graphs</Button>
             </Box>
-            <DataGrid columns={tableColumn} rows={tableData} pageSize={15} onSelectionModelChange={handleSelectData} components={{ Toolbar: GridToolbar }} />
+            <DataGrid className="main-table" columns={tableColumn} rows={tableData} pageSize={15} onSelectionModelChange={handleSelectData} components={{ Toolbar: GridToolbar }} />
             <ResponsiveDialog open={modalOpen} handleClose={handleClose} selectedData={selectedDataRow} handleEditRecord={handleEditRecord} handleDeleteRecord={handleDeleteRecord} handleAddData={handleAddData} />
         </div>
     )

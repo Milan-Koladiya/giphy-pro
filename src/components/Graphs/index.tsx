@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactApexChart from 'react-apexcharts'
@@ -52,9 +52,15 @@ function LineChart() {
             <Box sx={{ display: 'flex', justifyContent: "right" }}>
                 <Button onClick={onTableClick}>Table</Button>
             </Box>
-            <Box sx={{ display: 'flex', justifyContent: "space-around" }}>
-                <ReactApexChart options={chartData.options} series={chartData.series} type="bar" width={800} height={400} />
-                <ReactApexChart options={chartData.options} series={chartData.series} type="line" width={800} height={400} />
+            <Box className="main-chart" sx={{ alignItems: "center" }}>
+                <Grid container spacing={2}>
+                    <Grid item md={12} sm={12} xs={12}>
+                        <ReactApexChart className="chart" options={chartData.options} series={chartData.series} type="bar" width={800} height={400} />
+                    </Grid>
+                    <Grid item md={12} sm={12} xs={12}>
+                        <ReactApexChart className="chart" options={chartData.options} series={chartData.series} type="line" width={800} height={400} />
+                    </Grid>
+                </Grid>
             </Box>
         </div>
     )
